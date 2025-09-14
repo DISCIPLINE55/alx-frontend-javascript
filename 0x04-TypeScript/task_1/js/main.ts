@@ -9,18 +9,18 @@ interface Teacher {
 }
 
 // Task 2: Directors interface extending Teacher
-interface Directors extends Teacher {
+interface Director extends Teacher {
   numberOfReports: number;
 }
 
 // Task 3: printTeacher function and interface
 interface printTeacherFunction {
-  (firstName: string, lastName: string): string;
+  ({ firstName, lastName }: { firstName: string; lastName: string; }): string;
 }
 
-const printTeacher: printTeacherFunction = (firstName, lastName) => {
-  return `${firstName.charAt(0)}. ${lastName}`;
-};
+function printTeacher({ firstName, lastName }: { firstName: string; lastName: string; }): string {
+  return `${firstName}. ${lastName}`;
+}
 
 // Task 4: StudentClass
 interface StudentConstructor {
@@ -32,7 +32,7 @@ interface StudentClassInterface {
   displayName(): string;
 }
 
-class StudentClass implements StudentClassInterface {
+class StudentClass {
   private firstName: string;
   private lastName: string;
 
@@ -61,7 +61,7 @@ const teacher3: Teacher = {
 
 console.log(teacher3);
 
-const director1: Directors = {
+const director1: Director = {
   firstName: 'John',
   lastName: 'Doe',
   location: 'London',
@@ -70,7 +70,7 @@ const director1: Directors = {
 };
 console.log(director1);
 
-console.log(printTeacher("John", "Doe"));
+console.log(printTeacher({ firstName: "John", lastName: "Doe" }));
 
 const student = new StudentClass("John", "Doe");
 console.log(student.displayName());
